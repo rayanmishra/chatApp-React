@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   addDoc,
   collection,
@@ -13,6 +13,7 @@ import { auth, db } from '../firebase';
 import MessageBubble from './MessageBubble';
 
 const ChatRoom = () => {
+  const dummy = useRef();
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
@@ -32,6 +33,7 @@ const ChatRoom = () => {
       // saving messages array in a state
       setMessages(messages);
     });
+
     // Cleaning up my useEffect
     return () => cleanUp();
   }, []);
@@ -51,6 +53,7 @@ const ChatRoom = () => {
     });
 
     setNewMessage('');
+    dummy.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -68,6 +71,7 @@ const ChatRoom = () => {
             //   {msg.text}
             // </div>
           ))}
+          <div ref={dummy}></div>
         </div>
 
         <form className="message__form" onSubmit={handleSubmit}>
@@ -95,13 +99,3 @@ export default ChatRoom;
 // addDoc just add a document to the collection(database)
 // severTimestamp is to acquire the time when it was created
 // onSnapshot is like onValue
-
-// const ChatRoom = () => {
-//   return (
-//     <main>
-//       <div>CHatroom</div>
-//     </main>
-//   );
-// };
-
-// export default ChatRoom;
