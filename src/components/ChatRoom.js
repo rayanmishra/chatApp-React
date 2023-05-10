@@ -10,6 +10,8 @@ import {
 } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
+import MessageBubble from './MessageBubble';
+
 const ChatRoom = () => {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -43,6 +45,8 @@ const ChatRoom = () => {
       text: newMessage,
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
+      avatar: auth.currentUser.photoURL,
+      uid: auth.currentUser.uid,
     });
 
     setNewMessage('');
@@ -57,10 +61,11 @@ const ChatRoom = () => {
 
         <div className="messages">
           {messages.map((msg) => (
-            <div className="message" key={msg.id}>
-              <span className="user">{msg.user}:</span>
-              {msg.text}
-            </div>
+            <MessageBubble key={msg.id} msg={msg} />
+            // <div className="message" key={msg.id}>
+            //   <span className="user">{msg.user}:</span>
+            //   {msg.text}
+            // </div>
           ))}
         </div>
 
