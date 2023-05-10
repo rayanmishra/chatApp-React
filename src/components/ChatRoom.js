@@ -21,6 +21,7 @@ const ChatRoom = () => {
 
   // To recieve message
   useEffect(() => {
+    const messageRef = collection(db, 'messages');
     const queryMessages = query(messageRef, orderBy('createdAt'), limit(50));
     const cleanUp = onSnapshot(queryMessages, (snapshot) => {
       // create an empty array and put all the info&id

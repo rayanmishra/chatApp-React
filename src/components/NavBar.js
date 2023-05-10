@@ -6,8 +6,8 @@ import { signInWithPopup } from 'firebase/auth';
 const NavBar = () => {
   const [user] = useAuthState(auth);
 
-  const googleSignIn = async () => {
-    const result = await signInWithPopup(auth, provider);
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider);
   };
 
   const signUserOut = () => {
