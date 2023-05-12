@@ -1,5 +1,5 @@
 import './App.css';
-// import NavBar from './components/NavBar';
+
 import ChatRoom from './components/ChatRoom';
 import Welcome from './components/Welcome';
 
