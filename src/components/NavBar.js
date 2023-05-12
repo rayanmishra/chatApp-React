@@ -16,15 +16,11 @@ const NavBar = () => {
   // When user presses Sign in the button changes to Sign out
   return (
     <nav>
-      <h1>React Chat</h1>
+      <p className="nav__text">Welcome, {user.displayName}</p>
 
-      {user ? (
-        <button className="sign-out" onClick={signUserOut}>
-          Sign Out
-        </button>
-      ) : (
-        <button onClick={googleSignIn}>Sign In</button>
-      )}
+      <button className="sign-out" onClick={signUserOut}>
+        Sign Out
+      </button>
     </nav>
   );
 };
