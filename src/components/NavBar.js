@@ -1,14 +1,14 @@
 import React from 'react';
-import { auth, provider } from '../firebase';
+import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signInWithPopup } from 'firebase/auth';
+// import { signInWithPopup } from 'firebase/auth';
 // Nav
 const NavBar = () => {
   const [user] = useAuthState(auth);
 
-  const googleSignIn = () => {
-    signInWithPopup(auth, provider);
-  };
+  // const googleSignIn = () => {
+  //   signInWithPopup(auth, provider);
+  // };
 
   const signUserOut = () => {
     auth.signOut();
