@@ -322,9 +322,9 @@ nav {
 /* chatroom components */
 /***********************/
 
-.chatroom {
+/* .chatroom {
   height: 100vh;
-}
+} */
 
 .chat__room {
   display: flex;
