@@ -68,7 +68,7 @@ const ChatRoom = () => {
   };
 
   return (
-    <div>
+    <div className="chatroom">
       <NavBar />
       <main>
         <div className="chat__room">
