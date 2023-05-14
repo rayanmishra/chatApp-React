@@ -1,11 +1,23 @@
 import { auth, provider } from '../firebase';
 
-import { signInWithPopup } from 'firebase/auth';
+import {
+  signInWithPopup,
+  signInAnonymously,
+  updateProfile,
+} from 'firebase/auth';
 
 const Welcome = () => {
   const googleSignIn = () => {
     signInWithPopup(auth, provider);
   };
+
+  const guestSignin = async () => {
+    const userCredential = await signInAnonymously(auth);
+    const { user } = userCredential;
+    const displayName = 'Guest';
+    await updateProfile(user, { displayName });
+  };
+
   return (
     <main>
       <div className="main">
@@ -14,7 +26,10 @@ const Welcome = () => {
           Please Sign in with google to chat with your friends!
         </p>
         <button className="btn" onClick={googleSignIn}>
-          Sign In
+          Sign In With Google
+        </button>
+        <button className="btn" onClick={guestSignin}>
+          Guest User
         </button>
       </div>
     </main>

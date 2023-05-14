@@ -29,7 +29,11 @@ const ChatRoom = () => {
       let messages = [];
 
       snapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        messages.push({
+          ...doc.data(),
+          id: doc.id,
+          createdAt: doc.data().createdAt,
+        });
       });
       // saving messages array in a state
       scroll.current?.scrollIntoView({ behavior: 'smooth' });
@@ -94,7 +98,7 @@ const ChatRoom = () => {
               onChange={(e) => setNewMessage(e.target.value)}
               value={newMessage}
             />
-            <button class="btn__send" type="submit">
+            <button className="btn__send" type="submit">
               Send
             </button>
           </form>
