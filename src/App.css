@@ -365,12 +365,6 @@ nav {
   margin-bottom: 10px;
 } */
 
-/* .user {
-  font-weight: bold;
-  margin-right: 10px;
-  color: #d60000;
-} */
-
 .message__form {
   display: flex;
   width: 100%;
@@ -466,10 +460,6 @@ nav {
 /***********************/
 
 @media (max-width: 700px) {
-  /* html {
-    font-size: 60%;
-  } */
-
   .main__heading {
     font-size: 2rem;
   }
