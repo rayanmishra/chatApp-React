@@ -478,6 +478,11 @@ nav {
     font-size: 1.1rem;
   }
 
+  .sign-out {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
   .chat__room {
     height: 80vh;
   }
@@ -492,7 +497,7 @@ nav {
   }
 
   .message__input {
-    font-size: 14px;
-    padding: 12px;
+    font-size: 16px;
+    padding: 8px;
   }
 }
