@@ -6,11 +6,13 @@ import {
   updateProfile,
 } from 'firebase/auth';
 
+// Google sign in
 const Welcome = () => {
   const googleSignIn = () => {
     signInWithPopup(auth, provider);
   };
 
+  // Guest sign in. Add Guest name to the profile of the guest for display purposes
   const guestSignin = async () => {
     const userCredential = await signInAnonymously(auth);
     const { user } = userCredential;

@@ -13,19 +13,24 @@ import NavBar from './NavBar';
 import MessageBubble from './MessageBubble';
 
 const ChatRoom = () => {
+  // Ref to scroll to the latest message
   const scroll = useRef();
+  // State for the new message input
   const [newMessage, setNewMessage] = useState('');
+  // State to store the messages
   const [messages, setMessages] = useState([]);
 
-  // Ref to the database
+  // Reference to the 'messages' collection in the database
   const messageRef = collection(db, 'messages');
 
-  // To recieve message
+  // Fetch messages from the database when the component mounts
   useEffect(() => {
     const messageRef = collection(db, 'messages');
+    // Set up the query to get the latest 50 messages, ordered by createdAt timestamp
     const queryMessages = query(messageRef, orderBy('createdAt'), limit(50));
+    // Using onValue equivalent to fetch the latest database
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
-      // create an empty array and put all the info&id
+      // Create an empty array and populate it with message info and ID
       let messages = [];
 
       snapshot.forEach((doc) => {
@@ -35,26 +40,31 @@ const ChatRoom = () => {
           createdAt: doc.data().createdAt,
         });
       });
-      // saving messages array in a state
-      scroll.current?.scrollIntoView({ behavior: 'smooth' });
+
+      // Update the state with the messages array
       setMessages(messages);
+      // Scroll to the latest message
+      scroll.current?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Cleaning up my useEffect
+    // Cleaning up my useEffect during unmount
     return () => unsubscribe();
   }, []);
 
-  // Scroll to the bottom of the message list
+  // Scroll to the bottom of the message list whenever new messages are recieved
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // To add message to the database
+  // Add a new message to the database
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // check for empty message
     if (newMessage === '') return;
 
+    // Create a new document in the 'messages' collection with the message data
+    // these properties contain text msg, when it was created, which user created it etc
     await addDoc(messageRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
@@ -63,13 +73,16 @@ const ChatRoom = () => {
       uid: auth.currentUser.uid,
     });
 
+    // Clear the input field and scroll to the latest message
     setNewMessage('');
     scroll.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Render the ChatRoom component
   return (
     <div className="chatroom">
       <NavBar />
+
       <main>
         <div className="chat__room">
           <div className="header">
@@ -105,7 +118,3 @@ const ChatRoom = () => {
 };
 
 export default ChatRoom;
-
-// addDoc just add a document to the collection(database)
-// severTimestamp is to acquire the time when it was created
-// onSnapshot is like onValue

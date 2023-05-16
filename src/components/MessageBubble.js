@@ -1,18 +1,21 @@
 import { auth, db } from '../firebase';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import MessageEdit from './MessageEdit';
 import { updateDoc, doc } from 'firebase/firestore';
 
 const MessageBubble = ({ msg }) => {
+  // Getting the authenticated user using the 'useAuthState' hook
   const [user] = useAuthState(auth);
-
+  // Setting up a state to manage whether the edit message is visible or not
   const [showEdit, setShowEdit] = useState(false);
 
+  // Event handler for clicking the edit button
   const handleEditClick = () => {
     setShowEdit(!showEdit);
   };
 
+  // Function to update the message content in the database
   const messageUpdate = async (id, text) => {
     const data = {
       text: text,
@@ -22,11 +25,13 @@ const MessageBubble = ({ msg }) => {
     setShowEdit(!showEdit);
   };
 
+  // Conditionally rendering the MessageEdit component if 'showEdit' is true
   let content;
   if (showEdit) {
     content = <MessageEdit msg={msg} onSubmit={messageUpdate} />;
   }
 
+  // Function to convert the message creation time to a formatted time string since firestore gives me time in seconds and milliseconds
   function timeConvert(time) {
     const milliseconds = time?.seconds * 1000 + time?.nanoseconds / 1000000;
     const createdAtDate = new Date(milliseconds);
@@ -34,7 +39,6 @@ const MessageBubble = ({ msg }) => {
       hour12: true,
       hour: 'numeric',
       minute: 'numeric',
-
       milliseconds: false,
     };
 
@@ -43,6 +47,7 @@ const MessageBubble = ({ msg }) => {
     return formattedTime;
   }
 
+  // Function to get the display time for the message (Just now for latest message and Normal time for the older messages)
   function getDisplayTime() {
     if (!msg.createdAt) {
       return 'Just now';
@@ -55,18 +60,18 @@ const MessageBubble = ({ msg }) => {
   }
 
   return (
-    <div className={`chat-bubble ${msg.uid === user.uid ? 'right' : ''}`}>
-      <div className="chat-bubble__right">
+    <div className={`chat__bubble ${msg.uid === user.uid ? 'right' : ''}`}>
+      <div className="chat__bubble__right">
         <div className="user__header">
-          <p className="user-name">{msg.user}</p>
-          <p className="user-time">{getDisplayTime()}</p>
+          <p className="user__name">{msg.user}</p>
+          <p className="user__time">{getDisplayTime()}</p>
           {msg.uid === user.uid ? (
             <button className="edit" onClick={handleEditClick}>
               edit
             </button>
           ) : null}
         </div>
-        {showEdit ? content : <p className="user-message">{msg.text}</p>}
+        {showEdit ? content : <p className="user__message">{msg.text}</p>}
       </div>
     </div>
   );
