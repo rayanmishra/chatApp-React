@@ -1,8 +1,31 @@
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import MessageEdit from './MessageEdit';
+import { updateDoc, doc } from 'firebase/firestore';
 
 const MessageBubble = ({ msg }) => {
   const [user] = useAuthState(auth);
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleEditClick = () => {
+    setShowEdit(!showEdit);
+  };
+
+  const messageUpdate = async (id, text) => {
+    const data = {
+      text: text,
+    };
+    const messageRef = doc(db, 'messages', id);
+    updateDoc(messageRef, data);
+    setShowEdit(!showEdit);
+  };
+
+  let content;
+  if (showEdit) {
+    content = <MessageEdit msg={msg} onSubmit={messageUpdate} />;
+  }
 
   function timeConvert(time) {
     const milliseconds = time?.seconds * 1000 + time?.nanoseconds / 1000000;
@@ -37,8 +60,13 @@ const MessageBubble = ({ msg }) => {
         <div className="user__header">
           <p className="user-name">{msg.user}</p>
           <p className="user-time">{getDisplayTime()}</p>
+          {msg.uid === user.uid ? (
+            <button className="edit" onClick={handleEditClick}>
+              edit
+            </button>
+          ) : null}
         </div>
-        <p className="user-message">{msg.text}</p>
+        {showEdit ? content : <p className="user-message">{msg.text}</p>}
       </div>
     </div>
   );

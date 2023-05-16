@@ -79,10 +79,6 @@ const ChatRoom = () => {
           <div className="messages">
             {messages.map((msg) => (
               <MessageBubble key={msg.id} msg={msg} />
-              // <div className="message" key={msg.id}>
-              //   <span className="user">{msg.user}:</span>
-              //   {msg.text}
-              // </div>
             ))}
             <div ref={scroll}></div>
           </div>
