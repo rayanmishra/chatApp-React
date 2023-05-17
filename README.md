@@ -1,5 +1,7 @@
 Live site for development branch: https://elaborate-semolina-c47886.netlify.app/
 
+Live site for Main branch: https://strong-pegasus-608b74.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
