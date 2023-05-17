@@ -16,7 +16,7 @@ const ChatRoom = () => {
   // Ref to scroll to the latest message
   const scroll = useRef();
 
-  // State for the new message input
+  // State for the new message input being typed
   const [newMessage, setNewMessage] = useState('');
   // State to store the messages
   const [messages, setMessages] = useState([]);
@@ -79,7 +79,7 @@ const ChatRoom = () => {
     // check for empty message
     if (newMessage === '') return;
 
-    // Create a new document in the 'messages' collection with the message data
+    // Create a new document using addDoc in the 'messages' collection with the message data
     // these properties contain text msg, when it was created, which user created it etc
     await addDoc(messageRef, {
       text: newMessage,
@@ -89,9 +89,8 @@ const ChatRoom = () => {
       uid: auth.currentUser.uid,
     });
 
-    // Clear the input field and scroll to the latest message
+    // Clear the input field
     setNewMessage('');
-    // scroll.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Render the ChatRoom component
