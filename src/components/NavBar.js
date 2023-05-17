@@ -1,30 +1,28 @@
-import React from 'react';
-import { auth, provider } from '../firebase';
+import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signInWithPopup } from 'firebase/auth';
+
 // Nav
 const NavBar = () => {
+  // Using the 'useAuthState' to get the authenticated user state from the 'auth' object
   const [user] = useAuthState(auth);
 
-  const googleSignIn = () => {
-    signInWithPopup(auth, provider);
-  };
-
+  // Calling the 'signOut' method from the 'auth' object to sign the user out
   const signUserOut = () => {
     auth.signOut();
   };
-  // When user presses Sign in the button changes to Sign out
+
+  // When user presses Sign in, the button changes to Sign out
   return (
     <nav>
-      <h1>React Chat</h1>
-
-      {user ? (
-        <button className="sign-out" onClick={signUserOut}>
-          Sign Out
-        </button>
+      {user.displayName === null ? (
+        <p className="nav__text">Welcome, Guest</p>
       ) : (
-        <button onClick={googleSignIn}>Sign In</button>
+        <p className="nav__text">Welcome, {user.displayName}</p>
       )}
+
+      <button className="sign-out" onClick={signUserOut}>
+        Sign Out
+      </button>
     </nav>
   );
 };
