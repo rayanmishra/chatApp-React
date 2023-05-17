@@ -15,7 +15,7 @@ const MessageBubble = ({ msg }) => {
     setShowEdit(!showEdit);
   };
 
-  // Function to update the message content in the database
+  // Function to update the messages content in the database
   const messageUpdate = async (id, text) => {
     const data = {
       text: text,
