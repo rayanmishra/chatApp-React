@@ -15,10 +15,16 @@ import MessageBubble from './MessageBubble';
 const ChatRoom = () => {
   // Ref to scroll to the latest message
   const scroll = useRef();
+
   // State for the new message input
   const [newMessage, setNewMessage] = useState('');
   // State to store the messages
   const [messages, setMessages] = useState([]);
+
+  // State to track if a new message has been added
+  const [newMessageAdded, setNewMessageAdded] = useState(false);
+  // Ref to store the length of previous messages
+  const prevMessagesLengthRef = useRef(0);
 
   // Reference to the 'messages' collection in the database
   const messageRef = collection(db, 'messages');
@@ -43,8 +49,14 @@ const ChatRoom = () => {
 
       // Update the state with the messages array
       setMessages(messages);
-      // Scroll to the latest message
-      scroll.current?.scrollIntoView({ behavior: 'smooth' });
+
+      // Check if a new message has been added
+      if (messages.length > prevMessagesLengthRef.current) {
+        setNewMessageAdded(true);
+      }
+
+      // Update the length of previous messages
+      prevMessagesLengthRef.current = messages.length;
     });
 
     // Cleaning up my useEffect during unmount
@@ -53,8 +65,12 @@ const ChatRoom = () => {
 
   // Scroll to the bottom of the message list whenever new messages are recieved
   useEffect(() => {
-    scroll.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    if (newMessageAdded) {
+      scroll.current?.scrollIntoView({ behavior: 'smooth' });
+      // Reset the newMessageAdded state
+      setNewMessageAdded(false);
+    }
+  }, [newMessageAdded]);
 
   // Add a new message to the database
   const handleSubmit = async (e) => {
@@ -75,7 +91,7 @@ const ChatRoom = () => {
 
     // Clear the input field and scroll to the latest message
     setNewMessage('');
-    scroll.current?.scrollIntoView({ behavior: 'smooth' });
+    // scroll.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Render the ChatRoom component

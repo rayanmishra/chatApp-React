@@ -22,6 +22,7 @@ const MessageBubble = ({ msg }) => {
     };
     const messageRef = doc(db, 'messages', id);
     updateDoc(messageRef, data);
+
     setShowEdit(!showEdit);
   };
 
