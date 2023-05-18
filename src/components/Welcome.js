@@ -1,5 +1,5 @@
 import { auth, provider } from '../firebase';
-
+import Footer from './Footer';
 import {
   signInWithPopup,
   signInAnonymously,
@@ -21,8 +21,8 @@ const Welcome = () => {
   };
 
   return (
-    <main>
-      <div className="main">
+    <>
+      <main className="main">
         <h1 className="main__heading">Welcome to the Chat App</h1>
         <p className="main__body">
           Please Sign in with google to chat with your friends!
@@ -33,8 +33,9 @@ const Welcome = () => {
         <button className="btn" onClick={guestSignin}>
           Guest User
         </button>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 };
 

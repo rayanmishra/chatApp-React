@@ -238,8 +238,12 @@ html {
 
 /***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
-/* color:#94e19b
-#1c8324 */
+/* colors:
+#bcf497 #94e19b  #1c8324 #25a20f #01572c #0d3f11 
+#f0f0f0 #fff 
+#101c34
+ #333
+ */
 /***********************/
 /* Welcome components */
 /***********************/
@@ -286,6 +290,16 @@ html {
   background-color: #0d3f11;
 }
 
+/***********************/
+/* Footer components */
+/***********************/
+
+.footer__text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 4rem;
+}
 /***********************/
 /* Nav components */
 /***********************/
@@ -342,7 +356,7 @@ nav {
 }
 .header {
   background-color: #25a20f;
-  color: white;
+  color: #fff;
   width: 100%;
   text-align: center;
   padding: 1rem 0;
@@ -412,29 +426,21 @@ nav {
   border-radius: 20px 20px 0 20px;
   background-color: #bcf497;
   color: #333;
-  /* border: 2px solid #25a20f; */
 }
 
-/* .chat__bubble__left {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
-} */
-
 .edit {
-  background-color: hsla(0, 0%, 65%, 0.2);
+  background-color: rgba(166, 166, 166, 0.2);
   border: none;
-
   border-radius: 100px;
-  cursor: pointer;
   display: inline-block;
+
   font-size: 0;
   height: 20px;
-  outline: none;
-  position: relative;
-  vertical-align: top;
   width: 20px;
+  cursor: pointer;
+  outline: none;
+  vertical-align: top;
+  position: relative;
 }
 .edit:hover:after,
 .edit:active:after {
@@ -443,15 +449,19 @@ nav {
   display: block;
   font-size: 15px;
   font-weight: 700;
+
+  width: 20px;
   height: 20px;
-  left: 50%;
+
   position: absolute;
+  left: 50%;
   top: 50%;
+
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(20deg);
   transform: translateX(-50%) translateY(-50%) rotate(20deg);
   -webkit-transform-origin: center center;
   transform-origin: center center;
-  width: 20px;
+
   z-index: 10;
 }
 
