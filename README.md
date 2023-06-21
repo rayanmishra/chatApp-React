@@ -22,4 +22,12 @@ A Chat Application that allows instant messaging in a dedicated chatroom. <br />
 
 * Landing Section
   
-![Organic store preview](https://github.com/rayanmishra/organicEcommerceStore/blob/main/assets/preview/organicHome.png).
+![Organic store preview](https://github.com/rayanmishra/chatApp-React/blob/main/src/assets/Chat%20App%20(2).png)
+
+* ChatRoom Section
+  
+![Organic store preview](https://github.com/rayanmishra/chatApp-React/blob/main/src/assets/Chat%20App%20(3).png)
+
+* Edit feature
+  
+![Organic store preview](https://github.com/rayanmishra/chatApp-React/blob/main/src/assets/Chat%20App%20(4).png)
