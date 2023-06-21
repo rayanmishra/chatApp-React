@@ -1,20 +1,25 @@
-
-# Project description
-
-This chat app allows instant messaging in a dedicated chatroom, offering Google and anonymous login options. Users can send, receive, and edit messages in real-time.<br />
-
-I learned a lot during this project in terms of problem-solving and programming. A few key lessons were:<br />
-Fundamentals of React.js <br />
-Fundamentals of App Architecture<br />
-Exploring different types of login authentication options.<br />
-Basics of Firestore as a database<br />
-Working with Asynchronous JS<br />
-Learning lots of cool React hooks<br />
+# ChatApp
 
 
-## Getting Started with Create React App
+## Overview
+A Chat Application that allows instant messaging in a dedicated chatroom. <br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+* CRUD (Create(Add), Read, Update, Delete{ I chose to keep edit in favour of delete feature})
+* User authentication with Firebase and session persistence (user stays logged in if same session)
+* Anonymous login
+* Firebase Firestore to store saved backronyms and user account information
+* Fully responsive across various screen sizes
 
+ ## Technologies Used
+* React.js
+* JavaScript 
+* Firebase (User Authentication, Firestore) 
+* HTML5 
+* CSS3 
 
+## Preview
 
+* Landing Section
+  
+![Organic store preview](https://github.com/rayanmishra/organicEcommerceStore/blob/main/assets/preview/organicHome.png).
