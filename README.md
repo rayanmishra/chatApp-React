@@ -8,7 +8,7 @@ A Chat Application that allows instant messaging in a dedicated chatroom. <br />
 * CRUD (Create(Add), Read, Update, Delete{ I chose to keep edit in favour of delete feature})
 * User authentication with Firebase and session persistence (user stays logged in if same session)
 * Anonymous login
-* Firebase Firestore to store saved backronyms and user account information
+* Firebase Firestore to store messages and user account information
 * Fully responsive across various screen sizes
 
  ## Technologies Used
