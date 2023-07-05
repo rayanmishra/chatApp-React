@@ -5,7 +5,6 @@ import MessageEdit from './MessageEdit';
 import { updateDoc, doc } from 'firebase/firestore';
 
 const MessageBubble = ({ msg }) => {
-  console.log(msg.createdAt);
   // Getting the authenticated user using the 'useAuthState' hook
   const [user] = useAuthState(auth);
   // Setting up a state to manage whether the edit message is visible or not
